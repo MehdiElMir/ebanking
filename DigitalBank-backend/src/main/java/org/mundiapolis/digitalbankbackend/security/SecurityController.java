@@ -67,7 +67,7 @@ public class SecurityController {
     @PostMapping("/addUser")
     public AppUser addUser(String username,String email, String password,String confirmPassword){
         AppUser appUser = accountService.addnewUser(username,email,password,confirmPassword);
-        accountService.addRoleToUser(username,"SCOPE_USER");
+
         return appUser;
     }
 
