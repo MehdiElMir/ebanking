@@ -16,5 +16,8 @@ public interface AccountService {
     AppUser loadUserByUsername(String username);
 
     List<AppUser> findAllUsers();
+    AppUser updateUser(AppUser appUser);
+    void  deleteUser(String userID);
+
 
 }

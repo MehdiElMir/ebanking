@@ -1,18 +1,17 @@
 package org.mundiapolis.digitalbankbackend.security;
 
+import org.mundiapolis.digitalbankbackend.dtos.CustomerDTO;
 import org.mundiapolis.digitalbankbackend.security.entities.AppUser;
 import org.mundiapolis.digitalbankbackend.security.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -61,17 +60,31 @@ public class SecurityController {
         return Map.of("access-token",jwt);
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @PostMapping("/addUser")
     public AppUser addUser(String username,String email, String password,String confirmPassword){
         AppUser appUser = accountService.addnewUser(username,email,password,confirmPassword);
         return appUser;
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @GetMapping("/users")
     public List<AppUser> getUsers(){
         List<AppUser> users = accountService.findAllUsers();
         return users;
     }
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    @PutMapping("/users/{userID}")
+    public AppUser updateUser(@PathVariable String userID ,  @RequestBody AppUser appUser){
+        appUser.setUserId(userID);
+        return accountService.updateUser(appUser);
+    }
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    @DeleteMapping("/users/{userID}")
+    public void deleteUser(@PathVariable String userID){
+        accountService.deleteUser(userID);
+    }
+
 
 
 

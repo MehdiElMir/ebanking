@@ -1,6 +1,8 @@
 package org.mundiapolis.digitalbankbackend.security.service;
 
 import lombok.AllArgsConstructor;
+import org.mundiapolis.digitalbankbackend.dtos.CustomerDTO;
+import org.mundiapolis.digitalbankbackend.entities.Customer;
 import org.mundiapolis.digitalbankbackend.security.entities.AppRole;
 import org.mundiapolis.digitalbankbackend.security.entities.AppUser;
 import org.mundiapolis.digitalbankbackend.security.repositories.AppRoleRepository;
@@ -73,5 +75,18 @@ public class AccountServiceImpl implements AccountService{
         return appUsers;
     }
 
+    @Override
+    public AppUser updateUser(AppUser appUser) {
+
+        AppUser user =  appUserRepository.save(appUser);
+        return user;
+
+    }
+
+    @Override
+    public void deleteUser(String userID) {
+        appUserRepository.deleteById(userID);
+
+    }
 
 }
