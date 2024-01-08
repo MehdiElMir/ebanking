@@ -1,5 +1,7 @@
 package org.mundiapolis.digitalbankbackend.security;
 
+import org.mundiapolis.digitalbankbackend.security.entities.AppUser;
+import org.mundiapolis.digitalbankbackend.security.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -26,6 +29,9 @@ public class SecurityController {
 
     @Autowired
     private JwtEncoder jwtEncoder;
+
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping("/profile")
     public Authentication authentication(Authentication authentication){
@@ -54,4 +60,19 @@ public class SecurityController {
         String jwt = jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
         return Map.of("access-token",jwt);
     }
+
+    @PostMapping("/addUser")
+    public AppUser addUser(String username,String email, String password,String confirmPassword){
+        AppUser appUser = accountService.addnewUser(username,email,password,confirmPassword);
+        return appUser;
+    }
+
+    @GetMapping("/users")
+    public List<AppUser> getUsers(){
+        List<AppUser> users = accountService.findAllUsers();
+        return users;
+    }
+
+
+
 }

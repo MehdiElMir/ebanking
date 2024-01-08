@@ -13,6 +13,7 @@ import org.mundiapolis.digitalbankbackend.exceptions.CustomerNotFoundException;
 import org.mundiapolis.digitalbankbackend.repositories.AccountOperationRepository;
 import org.mundiapolis.digitalbankbackend.repositories.BankAccountRepository;
 import org.mundiapolis.digitalbankbackend.repositories.CustomerRepository;
+import org.mundiapolis.digitalbankbackend.security.service.AccountService;
 import org.mundiapolis.digitalbankbackend.services.BankAccountService;
 import org.mundiapolis.digitalbankbackend.services.BankService;
 import org.springframework.boot.CommandLineRunner;
@@ -65,6 +66,24 @@ public class DigitalBankBackendApplication {
                 }
 
             }
+        };
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService){
+        return args -> {
+            accountService.addnewRole("USER");
+            accountService.addnewRole("ADMIN");
+            accountService.addnewUser("user1","user1@gmail.com","1234","1234");
+            accountService.addnewUser("user2","user2@gmail.com","1234","1234");
+            accountService.addnewUser("admin","admin@gmail.com","1234","1234");
+
+            accountService.addRoleToUser("user1","USER");
+            accountService.addRoleToUser("user2","USER");
+            accountService.addRoleToUser("admin","ADMIN");
+            accountService.addRoleToUser("admin","USER");
+
+
         };
     }
 
