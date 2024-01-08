@@ -18,6 +18,11 @@ public interface AccountService {
     List<AppUser> findAllUsers();
     AppUser updateUser(AppUser appUser);
     void  deleteUser(String userID);
+    AppUser findUserByID(String userID);
+    AppUser findUserByUsername(String username);
+    List<AppRole> findAllRole();
+
+
 
 
 }

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AppUserRepository extends JpaRepository<AppUser, String> {
     AppUser findByUsername(String username);
-
+    AppUser findByUserId(String userId);
 
 }

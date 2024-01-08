@@ -52,7 +52,7 @@ public class AccountServiceImpl implements AccountService{
         AppUser appUser = appUserRepository.findByUsername(username);
         AppRole appRole = appRoleRepository.findById(role).get();
         appUser.getRoles().add(appRole);
-        //appUserRepository.save(appUser);
+        appUserRepository.save(appUser);
     }
 
     @Override
@@ -77,7 +77,6 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public AppUser updateUser(AppUser appUser) {
-
         AppUser user =  appUserRepository.save(appUser);
         return user;
 
@@ -86,6 +85,27 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public void deleteUser(String userID) {
         appUserRepository.deleteById(userID);
+
+    }
+
+    @Override
+    public AppUser findUserByID(String userID) {
+        AppUser user= appUserRepository.findByUserId(userID);
+        return user;
+    }
+
+    @Override
+    public AppUser findUserByUsername(String username) {
+        AppUser user= appUserRepository.findByUsername(username);
+        return user;
+    }
+
+    @Override
+    public List<AppRole> findAllRole() {
+        List<AppRole> Roles= appRoleRepository.findAll();
+        System.out.println("***************************");
+        System.out.println(Roles);
+        return Roles;
 
     }
 
