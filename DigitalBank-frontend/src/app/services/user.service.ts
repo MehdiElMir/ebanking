@@ -33,4 +33,17 @@ export class UserService {
   public deleteUser(id : string){
     return this.http.delete(this.backendHost+"/auth/delete/"+id);
   }
+
+  public findUserProfile(username : string):Observable<User>{
+    let par = new HttpParams().set('username',username)
+    return this.http.get<User>(this.backendHost+"/auth/users/find", {params : par});
+  }
+  public updateUser(user : User):Observable<User>{
+    return this.http.put<User>(this.backendHost+"/auth/updateProfile",user);
+  }
+
+  public findUserById(userId : string):Observable<User>{
+    return this.http.get<User>(this.backendHost+"/auth/users/"+userId);
+  }
+
 }

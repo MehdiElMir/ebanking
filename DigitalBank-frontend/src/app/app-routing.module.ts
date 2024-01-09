@@ -11,6 +11,8 @@ import {AuthorizationGuard} from "./guards/authorization.guard";
 import {NotAuthorizedComponent} from "./not-authorized/not-authorized.component";
 import {UsersComponent} from "./users/users.component";
 import {NewUserComponent} from "./new-user/new-user.component";
+import {UpdateProfileComponent} from "./update-profile/update-profile.component";
+import {UpdateUserComponent} from "./update-user/update-user.component";
 
 const routes: Routes = [
 
@@ -24,7 +26,9 @@ const routes: Routes = [
       {path:"customer-accounts/:id", component:CustomerAccountsComponent},
       {path:"notAuthorized", component:NotAuthorizedComponent},
       {path:"users", component:UsersComponent, canActivate:[AuthorizationGuard],data:{role: "ADMIN"}},
-      {path:"newUser", component:NewUserComponent, canActivate:[AuthorizationGuard],data:{role: "ADMIN"}}
+      {path:"newUser", component:NewUserComponent, canActivate:[AuthorizationGuard],data:{role: "ADMIN"}},
+      {path:"updateUser/:userId", component:UpdateUserComponent, canActivate:[AuthorizationGuard],data:{role: "ADMIN"}},
+      {path:"updateProfile", component:UpdateProfileComponent},
     ]}
 
 ];

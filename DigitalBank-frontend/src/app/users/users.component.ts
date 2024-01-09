@@ -61,4 +61,7 @@ export class UsersComponent implements OnInit{
   }
 
 
+  handleEditUser(u: User) {
+    this.router.navigateByUrl("/admin/updateUser/"+u.userId,{state:u})
+  }
 }

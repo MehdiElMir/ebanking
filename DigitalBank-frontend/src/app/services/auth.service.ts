@@ -33,6 +33,7 @@ export class AuthService {
     let decodedJwt:any = jwtDecode(this.accessToken);
     console.log(decodedJwt);
     this.username = decodedJwt.sub;
+
     this.roles = decodedJwt.scope;
     window.localStorage.setItem('jwt-token',this.accessToken)
 

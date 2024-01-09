@@ -87,10 +87,26 @@ public class SecurityController {
 
     @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @PutMapping("/update/{userID}")
-    public AppUser updateUser(@PathVariable String userID ,
+    public AppUser updateUser(@PathVariable String userId ,
                               @RequestBody AppUser appUser){
-        appUser.setUserId(userID);
+        appUser.setUserId(userId);
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        return accountService.updateUser(appUser);
+    }
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    @GetMapping ("/find/{userID}")
+    public AppUser findUserById(@RequestParam String userId){
+        return accountService.findUserByID(userId);
+    }
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
+    @PutMapping("/updateProfile")
+    public AppUser updateProfile(
+                              @RequestBody AppUser appUser){
+        appUser.setUserId(appUser.getUserId());
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        appUser.setConfirmPassword(passwordEncoder.encode(appUser.getConfirmPassword()));
         return accountService.updateUser(appUser);
     }
 
@@ -108,9 +124,9 @@ public class SecurityController {
         return user;
     }
 
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @GetMapping("/users/find")
-    public AppUser findUserByName(@RequestParam (name="username",defaultValue = "")String username){
+    public AppUser findUserByName(@RequestParam (name="username")String username){
         AppUser user = accountService.findUserByUsername(username);
         return user;
     }
