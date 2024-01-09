@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,9 +32,26 @@ public class AccountServiceImpl implements AccountService{
                 .userId(UUID.randomUUID().toString())
                 .username(username)
                 .password(passwordEncoder.encode(password))
+                .confirmPassword(passwordEncoder.encode(confirmPassword))
                 .email(email)
                 .build();
         AppUser savedAppUser = appUserRepository.save(appUser);
+        return savedAppUser;
+    }
+
+    @Override
+    public AppUser addUser(AppUser appUser) {
+        AppUser user =appUserRepository.findByUsername(appUser.getUsername());
+        if(user!=null) throw new RuntimeException("this user already exist");
+        if (!appUser.getPassword().equals(appUser.getConfirmPassword())) throw new RuntimeException("Password does not match!");
+         AppUser newUser = AppUser.builder()
+                .userId(UUID.randomUUID().toString())
+                .username(appUser.getUsername())
+                .password(passwordEncoder.encode(appUser.getPassword()))
+                 .confirmPassword(passwordEncoder.encode(appUser.getConfirmPassword()))
+                .email(appUser.getEmail())
+                .build();
+        AppUser savedAppUser = appUserRepository.save(newUser);
         return savedAppUser;
     }
 
@@ -107,6 +125,12 @@ public class AccountServiceImpl implements AccountService{
         System.out.println(Roles);
         return Roles;
 
+    }
+
+    @Override
+    public List<AppUser> searchUsers(String keyword) {
+        List<AppUser> users = appUserRepository.findByUsernameContains(keyword);
+        return users;
     }
 
 }

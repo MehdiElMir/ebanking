@@ -19,6 +19,7 @@ public class AppUser  {
     @Column(unique = true)
     private String username;
     private String password;
+    private String confirmPassword;
     private String email;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AppRole> roles;

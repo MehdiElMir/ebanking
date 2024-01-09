@@ -31,6 +31,7 @@ export class AuthService {
     this.isAuthenticated = true;
     this.accessToken = data['access-token'];
     let decodedJwt:any = jwtDecode(this.accessToken);
+    console.log(decodedJwt);
     this.username = decodedJwt.sub;
     this.roles = decodedJwt.scope;
     window.localStorage.setItem('jwt-token',this.accessToken)

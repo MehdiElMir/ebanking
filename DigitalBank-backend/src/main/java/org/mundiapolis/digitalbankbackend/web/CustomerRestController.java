@@ -20,35 +20,36 @@ public class CustomerRestController {
     private BankAccountService bankAccountService;
 
     @GetMapping("/customers")
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     public List<CustomerDTO> customers(){
         return bankAccountService.listCustomers();
     }
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @GetMapping("/customers/search")
     public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword",defaultValue = "") String keyword){
 
         return bankAccountService.searchCustomers(keyword);
     }
 
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @GetMapping("/customers/{id}")
     public CustomerDTO getCustomer(@PathVariable(name = "id") Long customerID) throws CustomerNotFoundException {
         return bankAccountService.getCustomer(customerID);
     }
 
     @PostMapping("/customers")
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
         return bankAccountService.saveCustomer(customerDTO);
     }
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @PutMapping ("/customers/{customerID}")
     public CustomerDTO updateCustomer(@PathVariable Long customerID ,@RequestBody CustomerDTO customerDTO){
         customerDTO.setId(customerID);
         return bankAccountService.updateCustomer(customerDTO);
     }
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @DeleteMapping("/customers/{id}")
     public void deleteCustomer(@PathVariable Long id){
         bankAccountService.deleteCustomer(id);

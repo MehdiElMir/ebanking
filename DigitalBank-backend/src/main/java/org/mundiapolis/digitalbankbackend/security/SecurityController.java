@@ -64,18 +64,28 @@ public class SecurityController {
         String jwt = jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
         return Map.of("access-token",jwt);
     }
-    @PostMapping("/addUser")
-    public AppUser addUser(String username,String email, String password,String confirmPassword){
-        AppUser appUser = accountService.addnewUser(username,email,password,confirmPassword);
 
-        return appUser;
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    @PostMapping("/addUser")
+    public AppUser addUser(@RequestBody AppUser appUser){
+        AppUser newappUser = accountService.addUser(appUser);
+        return newappUser;
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    @GetMapping("/users/search")
+    public List<AppUser> searchUsers(@RequestParam(name = "keyword",defaultValue = "") String keyword){
+        return accountService.searchUsers(keyword);
+    }
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @GetMapping("/users")
     public List<AppUser> getUsers(){
         List<AppUser> users = accountService.findAllUsers();
         return users;
     }
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @PutMapping("/update/{userID}")
     public AppUser updateUser(@PathVariable String userID ,
                               @RequestBody AppUser appUser){
@@ -83,22 +93,30 @@ public class SecurityController {
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         return accountService.updateUser(appUser);
     }
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @DeleteMapping("/delete/{userID}")
     public void deleteUser(@PathVariable String userID){
         accountService.deleteUser(userID);
     }
 
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @GetMapping("/users/{userID}")
     public AppUser findUser(@PathVariable String userID){
         AppUser user = accountService.findUserByID(userID);
         return user;
     }
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @GetMapping("/users/find")
     public AppUser findUserByName(@RequestParam (name="username",defaultValue = "")String username){
         AppUser user = accountService.findUserByUsername(username);
         return user;
     }
 
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @PutMapping("/users/addRole")
     public void addRoleToUser(@RequestParam (name="username")String username,
                               @RequestParam (name="role")String role){
@@ -106,6 +124,8 @@ public class SecurityController {
         accountService.addRoleToUser(username,role);
 
     }
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @PutMapping("/users/removeRole")
     public void removeRoleFromUser(@RequestParam (name="username")String username,
                                    @RequestParam (name="role")String role){
@@ -114,6 +134,8 @@ public class SecurityController {
 
     }
 
+
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     @GetMapping("/roles")
     public List<AppRole> getRoles(){
         List<AppRole> roles = accountService.findAllRole();

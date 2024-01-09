@@ -72,16 +72,16 @@ public class DigitalBankBackendApplication {
     @Bean
     CommandLineRunner commandLineRunnerUserDetails(AccountService accountService){
         return args -> {
-            accountService.addnewRole("SCOPE_USER");
-            accountService.addnewRole("SCOPE_ADMIN");
+            accountService.addnewRole("USER");
+            accountService.addnewRole("ADMIN");
             accountService.addnewUser("user1","user1@gmail.com","1234","1234");
             accountService.addnewUser("user2","user2@gmail.com","1234","1234");
             accountService.addnewUser("admin","admin@gmail.com","1234","1234");
 
-            accountService.addRoleToUser("user1","SCOPE_USER");
-            accountService.addRoleToUser("user2","SCOPE_USER");
-            accountService.addRoleToUser("admin","SCOPE_ADMIN");
-            accountService.addRoleToUser("admin","SCOPE_USER");
+            accountService.addRoleToUser("user1","USER");
+            accountService.addRoleToUser("user2","USER");
+            accountService.addRoleToUser("admin","ADMIN");
+            accountService.addRoleToUser("admin","USER");
 
 
         };
