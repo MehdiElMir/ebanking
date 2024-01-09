@@ -1,0 +1,29 @@
+<div class="d-flex  container justify-content-center">
+    <div class="card col-md-5 mt-3">
+        <div class="card-header">
+            Update User
+        </div>
+        <div class="card-body">
+            <form [formGroup]="updateUserFormGroup" (ngSubmit)="handleUpdateUser()">
+                <div class="mb-3">
+                    <label class="form-label">Username: </label>
+                    <input type="text" class="form-control" formControlName="username">
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email: </label>
+                    <input type="text" class="form-control" formControlName="email">
+                    <span class="text-danger" *ngIf="updateUserFormGroup.controls['email'].touched &&
+                      updateUserFormGroup.controls['email'].errors &&
+                      updateUserFormGroup.controls['email'].errors!['email']">
+            Email is not valid !
+          </span>
+                </div>
+
+
+
+                <button [disabled]="updateUserFormGroup.invalid"  type="submit" class="btn btn-info">Save</button>
+            </form>
+        </div>
+    </div>
+</div>

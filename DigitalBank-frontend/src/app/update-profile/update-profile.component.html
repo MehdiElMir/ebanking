@@ -1,0 +1,44 @@
+<div class="d-flex  container justify-content-center">
+  <div class="card col-md-5 mt-3">
+    <div class="card-header">
+      Update My Profile
+    </div>
+    <div class="card-body">
+      <form [formGroup]="updateProfileFormGroup" (ngSubmit)="handleUpdateUser()">
+        <div class="mb-3">
+          <label class="form-label">Username: </label>
+          <input type="text" class="form-control" formControlName="username">
+
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email: </label>
+          <input type="text" class="form-control" formControlName="email">
+          <span class="text-danger" *ngIf="updateProfileFormGroup.controls['email'].touched &&
+                      updateProfileFormGroup.controls['email'].errors &&
+                      updateProfileFormGroup.controls['email'].errors!['email']">
+            Email is not valid !
+          </span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password: </label>
+          <input type="password" class="form-control" formControlName="password">
+          <span class="text-danger" *ngIf="updateProfileFormGroup.controls['password'].touched &&
+                      updateProfileFormGroup.controls['password'].errors &&
+                      updateProfileFormGroup.controls['password'].errors!['required']">
+            Password is not valid !
+          </span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Confirm Password: </label>
+          <input type="password" class="form-control" formControlName="confirmPassword">
+          <span class="text-danger" *ngIf="updateProfileFormGroup.controls['confirmPassword'].touched &&
+                      updateProfileFormGroup.controls['confirmPassword'].errors &&
+                      updateProfileFormGroup.controls['confirmPassword'].errors!['required']">
+            Password is not valid !
+          </span>
+        </div>
+        <button [disabled]="updateProfileFormGroup.invalid"  type="submit" class="btn btn-info">Save</button>
+      </form>
+    </div>
+  </div>
+</div>
