@@ -82,6 +82,7 @@ public class DigitalBankBackendApplication {
             accountService.addRoleToUser("user2","USER");
             accountService.addRoleToUser("admin","ADMIN");
             accountService.addRoleToUser("admin","USER");
+            accountService.addRoleToUser("admin","USER");
 
 
         };

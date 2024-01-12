@@ -1,29 +1,31 @@
-<div class="d-flex  container justify-content-center">
-    <div class="card col-md-5 mt-3">
-        <div class="card-header">
-            Update User
-        </div>
+<!--&lt;!&ndash; Pour USER &ndash;&gt;
+               <input id="user"  type="checkbox" [checked]="userHasRole('USER')" value="USER">
+               <label for="user">USER</label>
+               &lt;!&ndash; Pour ADMIN &ndash;&gt;
+               <input id="admin"  type="checkbox" [checked]="userHasRole('ADMIN')" value="ADMIN">
+               <label for="admin">ADMIN</label>-->
+
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">Manange Roles</div>
         <div class="card-body">
-            <form [formGroup]="updateUserFormGroup" (ngSubmit)="handleUpdateUser()">
-                <div class="mb-3">
-                    <label class="form-label">Username: </label>
-                    <input type="text" class="form-control" formControlName="username">
+            <h4>{{this.user.username}}</h4>
+            <hr/>
 
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email: </label>
-                    <input type="text" class="form-control" formControlName="email">
-                    <span class="text-danger" *ngIf="updateUserFormGroup.controls['email'].touched &&
-                      updateUserFormGroup.controls['email'].errors &&
-                      updateUserFormGroup.controls['email'].errors!['email']">
-            Email is not valid !
-          </span>
-                </div>
-
-
-
-                <button [disabled]="updateUserFormGroup.invalid"  type="submit" class="btn btn-info">Save</button>
-            </form>
+            <table class="table">
+                <thead><th>USER</th><th>ADMIN</th></thead>
+                <tbody>
+                <tr>
+                    <td><button class="btn btn-success" (click)="AddRoleUser()">Add This Role</button></td>
+                    <td><button class="btn btn-success" (click)="AddRoleAdmin()">Add This Role</button></td>
+                </tr>
+                <tr>
+                    <td><button class="btn btn-danger" (click)="removeRoleUser()">Remove This Role</button></td>
+                    <td><button class="btn btn-danger" (click)="removeRoleAdmin()">Remove This Role</button></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

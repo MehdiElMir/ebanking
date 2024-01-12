@@ -46,4 +46,21 @@ export class UserService {
     return this.http.get<User>(this.backendHost+"/auth/users/"+userId);
   }
 
+  public addRoleToUser(username : string, role:string):Observable<User>{
+    let params = new HttpParams()
+        .set("username",username).set("role",role);
+    return this.http.put<User>(this.backendHost+"/auth/users/addRole",params);
+  }
+
+  public removeRoleToUser(username : string, role:string):Observable<User>{
+    let params = new HttpParams()
+        .set("username",username).set("role",role);
+    return this.http.put<User>(this.backendHost+"/auth/users/removeRole",params);
+  }
+
+
+
+
+
+
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AccountDetails} from "../model/account.model";
+import {AccountDetails} from "../model/accountDetails.model";
+import {Account} from "../model/account.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,11 @@ export class AccountsService {
   public transfert(accountSource: string,accountDestination: string, amount:number, description:string):Observable<any> {
     let data = {accountSource:accountSource,accountDestination:accountDestination,amount:amount,description:description};
     return this.http.post(this.backendHost+"/accounts/transfert",data);
+  }
+
+
+  public getAllAccounts():Observable<Account[]>{
+    return this.http.get<Account[]>(this.backendHost+"/accounts");
   }
 
 }

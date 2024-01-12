@@ -13,6 +13,7 @@ import {UsersComponent} from "./users/users.component";
 import {NewUserComponent} from "./new-user/new-user.component";
 import {UpdateProfileComponent} from "./update-profile/update-profile.component";
 import {UpdateUserComponent} from "./update-user/update-user.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 const routes: Routes = [
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:"", redirectTo :"/login", pathMatch:"full"},
   {path:"admin", component:AdminTemplateComponent,canActivate:[AuthenticationGuard],
     children:[
+      { path:"dashboard", component: DashboardComponent,canActivate:[AuthorizationGuard],data:{role:"ADMIN"}},
       { path:"customers", component: CustomersComponent},
       { path:"accounts", component: AccountsComponent},
       {path:"newCustomer", component:NewCustomerComponent, canActivate:[AuthorizationGuard],data:{role:"ADMIN"}},

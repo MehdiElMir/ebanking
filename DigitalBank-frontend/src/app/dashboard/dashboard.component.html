@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row mt-3 mb-5">
+    <div class=" col col-lg-6 d-flex justify-content-center align-items-center">
+        <div class="card card_custom">
+
+          <div class="card-body ">
+            <h2 style="text-align: center">Number of Accounts</h2>
+            <p id="nbr"></p>
+          </div>
+        </div>
+      </div>
+    <div class="col col-lg-6 d-flex justify-content-center align-items-center">
+      <div class="card card_custom">
+        <div class="card-body">
+          <h2 style="text-align: center">Number of Customers</h2>
+          <p id="nbr2">2</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  <div class="row mt-3">
+    <div class=" col col-lg-6 d-flex justify-content-center align-items-center">
+      <div class="center">
+        <h4 class="card_title">Balance Totale Par Type</h4>
+        <div class="center" style="width: 300px; height: 300px;">
+          <canvas  baseChart
+                  [type]="'pie'"
+                  [datasets]="pieChartDatasets"
+                  [labels]="pieChartLabels"
+                  [options]="pieChartOptions"
+                  [plugins]="pieChartPlugins"
+                  [legend]="pieChartLegend">
+          </canvas>
+
+      </div>
+        </div>
+    </div>
+    <div class="col col-lg-6 d-flex justify-content-center align-items-center">
+      <div class="center">
+        <h4 class="card_title">Types des comptes bancaires</h4>
+        <div class="center" style="width: 300px; height: 300px;">
+          <canvas  baseChart
+                  [type]="'pie'"
+                  [datasets]="pieChartDatasets1"
+                  [labels]="pieChartLabels1"
+                  [options]="pieChartOptions1"
+                  [plugins]="pieChartPlugins1"
+                  [legend]="pieChartLegend1">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

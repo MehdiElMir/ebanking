@@ -18,6 +18,8 @@ import { UsersComponent } from './users/users.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { NgChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +35,16 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     UsersComponent,
     NewUserComponent,
     UpdateProfileComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule
   ],
   providers: [
     {provide : HTTP_INTERCEPTORS,useClass:AppHttpInterceptor,multi:true}
