@@ -24,13 +24,16 @@ export class UpdateUserComponent implements OnInit{
     this.userId = this.route.snapshot.params["userId"];
 
     this.userService.findUserById(this.userId).subscribe(
-        (data: any) => {
-          this.user = data
-          this.userId = data.userId;
-        },
-        (error: any) => {
-          console.log(error);
-        }
+      {
+      next : (data: any) => {
+      this.user = data
+      this.userId = data.userId;
+      console.log(typeof this.user.roles, this.user.roles)
+    },
+    error: (error: any) => {
+      console.log(error);
+    }
+      }
     );
   }
 

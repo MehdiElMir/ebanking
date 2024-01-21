@@ -7,22 +7,27 @@
 
 
 <div class="container">
-    <div class="card">
-        <div class="card-header">Manange Roles</div>
+    <div class="card mt-5">
+        <div class="card-header">Manage Roles for :</div>
         <div class="card-body">
-            <h4>{{this.user.username}}</h4>
+            <h4 class="text-center h3 fw-bold">{{this.user.username}}</h4>
             <hr/>
 
             <table class="table">
-                <thead><th>USER</th><th>ADMIN</th></thead>
+                <thead>
+                <tr>
+                  <th class="text-center h5">USER</th>
+                  <th class="text-center h5">ADMIN</th>
+                </tr>
+                </thead>
                 <tbody>
                 <tr>
-                    <td><button class="btn btn-success" (click)="AddRoleUser()">Add This Role</button></td>
-                    <td><button class="btn btn-success" (click)="AddRoleAdmin()">Add This Role</button></td>
+                    <td class="text-center"><button class="badge text-bg-success w-25" (click)="AddRoleUser()">Add This Role</button></td>
+                    <td class="text-center"><button class="badge text-bg-success w-25" (click)="AddRoleAdmin()">Add This Role</button></td>
                 </tr>
                 <tr>
-                    <td><button class="btn btn-danger" (click)="removeRoleUser()">Remove This Role</button></td>
-                    <td><button class="btn btn-danger" (click)="removeRoleAdmin()">Remove This Role</button></td>
+                    <td class="text-center"><button class="badge text-bg-danger w-25" (click)="removeRoleUser()">Remove This Role</button></td>
+                    <td class="text-center" ><button class="badge text-bg-danger w-25" (click)="removeRoleAdmin()">Remove This Role</button></td>
                 </tr>
                 </tbody>
             </table>
